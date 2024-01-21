@@ -2,13 +2,8 @@
 import Image from "next/image";
 import MenuItem from "./MenuItem";
 import { usePathname } from "next/navigation";
-
-import { AiOutlineCalendar } from "react-icons/ai";
-import { AiOutlineAlignLeft } from "react-icons/ai";
-import { AiOutlineCheck } from "react-icons/ai";
-import { AiOutlinePicLeft } from "react-icons/ai";
+import { PiSignOut } from "react-icons/pi";
 import { menu } from "@/lib/menu";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 const SideBar = () => {
   const pathName = usePathname();
@@ -17,7 +12,7 @@ const SideBar = () => {
     router.push(link);
   };
   return (
-    <div className="flex h-[100vh]  flex-col items-center justify-between rounded-lg border-2  border-[#2B2B2BFF] bg-[#212121FF]  ">
+    <div className="flex h-[100vh] flex-col  items-center justify-between rounded-lg border-2 border-[#2B2B2BFF]  bg-[#212121FF] py-3  ">
       <div className="flex flex-row items-center gap-3 p-5">
         <Image
           src="/placeholder.jpg"
@@ -40,7 +35,9 @@ const SideBar = () => {
           />
         ))}
       </div>
-      <div></div>
+      <div className="flex flex-row gap-2 text-white">
+        Sign out <PiSignOut size={30} />
+      </div>
     </div>
   );
 };
