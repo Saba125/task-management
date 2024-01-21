@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import SideBar from "@/components/SideBar";
+import MainContent from "@/components/MainContent";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -16,7 +18,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={nunito.className}>{children}</body>
+      <body className={nunito.className}>
+        <div
+          className="
+    flex
+    flex-row
+    gap-4
+    p-10
+  "
+        >
+          <SideBar />
+          <div className="flex-1">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }
