@@ -10,9 +10,10 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
   const tasks = await prisma.todo.findMany({
     where: {
-      userEmail: "example12@gmail.com",
+      userEmail: session?.user?.email || "example12@gmail.com",
     },
   });
+
   if (tasks.length === 0) {
     return (
       <EmptyState

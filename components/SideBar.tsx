@@ -9,7 +9,6 @@ import SignIn from "./SignIn";
 import { useSession } from "next-auth/react";
 const SideBar = () => {
   const { data } = useSession();
-  console.log(data);
   const pathName = usePathname();
   const router = useRouter();
   const handleClick = (link: string) => {
