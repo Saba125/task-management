@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import SideBar from "@/components/SideBar";
 import MainContent from "@/components/MainContent";
+import AuthProvider from "@/providers/AuthProvider";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -19,17 +20,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <div
-          className="
+        <AuthProvider>
+          <div
+            className="
     flex
     flex-row
     gap-4
     p-10
   "
-        >
-          <SideBar />
-          <div className="flex-1">{children}</div>
-        </div>
+          >
+            <SideBar />
+            <div className="flex-1">{children}</div>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
