@@ -8,11 +8,7 @@ export const menu = [
     icon: AiOutlinePicLeft,
     link: "/",
   },
-  {
-    label: "Important!",
-    icon: AiOutlineAlignLeft,
-    link: "/important",
-  },
+
   {
     label: "Completed",
     icon: AiOutlineCheck,
