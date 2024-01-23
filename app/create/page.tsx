@@ -1,3 +1,4 @@
+import FormSubmit from "@/components/FormSubmitBtn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -62,9 +63,7 @@ const CreateTodo = async () => {
             </div>
 
             <div>
-              <Button type="submit" className="w-full" variant="destructive">
-                Add
-              </Button>
+              <FormSubmit fullWidth>Create</FormSubmit>
             </div>
           </form>
         </div>

@@ -27,9 +27,12 @@ export default async function Home() {
   }
   const bodyContent = (
     <div>
-      {tasks.map((task: Todo) => {
-        return <TaskItem key={task.id} task={task} />;
-      })}
+      <div className="flex gap-4 ">
+        {tasks.map((task: Todo) => {
+          return <TaskItem key={task.id} task={task} />;
+        })}
+        <AddTask />
+      </div>
     </div>
   );
   return (
