@@ -1,6 +1,7 @@
 import EmptyState from "@/components/EmptyState";
 import MainContent from "@/components/MainContent";
 import SideBar from "@/components/SideBar";
+import AddTask from "@/components/Task/AddTask";
 import TaskItem from "@/components/Task/TaskItem";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
@@ -16,10 +17,12 @@ export default async function Home() {
 
   if (tasks.length === 0) {
     return (
-      <EmptyState
-        title="No tasks found!"
-        subtitle="Create new to see your tasks"
-      />
+      <div className="flex flex-col">
+        <EmptyState
+          title="No tasks found!"
+          subtitle="Create new to see your tasks"
+        />
+      </div>
     );
   }
   const bodyContent = (

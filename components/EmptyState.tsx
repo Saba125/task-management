@@ -1,3 +1,4 @@
+import AddTask from "./Task/AddTask";
 import { Button } from "./ui/button";
 import Link from "next/link";
 interface EmptyStateProps {
@@ -6,12 +7,14 @@ interface EmptyStateProps {
 }
 const EmptyState: React.FC<EmptyStateProps> = ({ title, subtitle }) => {
   return (
-    <div className="mt-20 text-center">
-      <div className="text-2xl font-bold text-white"> {title} </div>
-      <div className="mt-2 font-light text-neutral-500"> {subtitle} </div>
-      <Button variant="outline" className="mt-3" asChild>
-        <Link href="/">Go back home.</Link>
-      </Button>
+    <div className="mt-20 flex flex-row gap-10">
+      <div>
+        <div className="text-2xl font-bold text-white"> {title} </div>
+        <div className="mt-2 font-light text-neutral-500"> {subtitle} </div>
+      </div>
+      <div className="flex-1">
+        <AddTask />
+      </div>
     </div>
   );
 };

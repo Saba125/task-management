@@ -1,24 +1,35 @@
-"use client";
 import Badge from "../Badge";
 import { AiFillDelete } from "react-icons/ai";
 import AddTask from "./AddTask";
 import axios from "axios";
 import { Todo } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+import formatDate from "@/lib/format";
 interface TaskItemProps {
   task: Todo;
 }
 const TaskItem: React.FC<TaskItemProps> = ({
   task: { id, title, taskName, createdAt, completed },
 }) => {
-  const router = useRouter();
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await axios.delete(`/api/todo/${id}`);
-      router.refresh();
-    } catch (error: any) {
-      console.log(error.message);
-    }
+  const handleDelete = async (formData: FormData) => {
+    "use server";
+    const todoId = formData.get("todoId") as string;
+    await prisma.todo.delete({
+      where: { id: todoId },
+    });
+    revalidatePath("/");
+  };
+  const handleUpdate = async (formData: FormData) => {
+    "use server";
+    const todoId = formData.get("todoId") as string;
+    await prisma.todo.update({
+      where: { id: todoId },
+      data: { completed: !completed },
+    });
+    revalidatePath("/");
   };
   return (
     <div className="flex flex-row gap-4">
@@ -29,12 +40,19 @@ const TaskItem: React.FC<TaskItemProps> = ({
             <p className="text-base capitalize  text-white"> {taskName} </p>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-white">05/10/2023</span>
+            <span className="text-white">{formatDate(createdAt)}</span>
             <div className="flex flex-row items-center justify-between">
-              <Badge type={completed ? "completed" : "incomplete"} />
-              <div onClick={() => handleDelete(id)} className="cursor-pointer">
-                <AiFillDelete fill="red" size={20} />
-              </div>
+              <form action={handleUpdate}>
+                <input name="todoId" type="hidden" value={id} />
+                <Button type="submit">
+                  {" "}
+                  {completed ? "Completed" : "Incomplete"}{" "}
+                </Button>
+              </form>
+              <form action={handleDelete} className="cursor-pointer">
+                <input name="todoId" type="hidden" value={id} />
+                <Button variant="destructive">Delete</Button>
+              </form>
             </div>
           </div>
         </div>
